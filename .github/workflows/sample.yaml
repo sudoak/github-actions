@@ -1,0 +1,27 @@
+name: Shell Command
+
+on: [push]
+
+jobs: 
+  run-shell-command:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo a string
+        run: echo "LOL"
+      - name: multiline script
+        run: |
+          node -v
+          npm -v
+  run-windows-command:
+    needs: [run-shell-command]
+    runs-on: windows-latest
+    steps:
+      - name: Window Command
+        run: pwd
+        shell: bash
+  something-good:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pwd
+        run: pwd
+  

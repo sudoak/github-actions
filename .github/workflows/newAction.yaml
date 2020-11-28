@@ -1,0 +1,13 @@
+name: New Action
+
+on: [push]
+
+jobs:
+  run-github-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: use a Action
+      - uses: actions/hello-world-javascript-action@v1.1
+      - with:
+          who-to-greet: 'Mona the Octocat'
+

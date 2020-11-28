@@ -1,0 +1,27 @@
+a: 1
+object:
+    key: 1 
+    key2: 2
+array:
+    - one
+    - two
+    - three
+    - five: six
+objectArray:
+    - key: 1
+      key2: 2
+    - key: 3
+      key2: 4
+longSenteence: > 
+    aadad
+    adadad
+    adadada
+    adadada
+
+longSenteenceWithNewLine: |
+    aadad
+    adadad
+    adadada
+    adadada
+
+
