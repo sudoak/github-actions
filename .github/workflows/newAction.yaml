@@ -13,4 +13,10 @@ jobs:
           who-to-greet: 'Mona the Octocat'
       - name: Log Greeting time
         run: echo "${{steps.greet.outputs.time}}"
+      - name: Some Env
+        run: |
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKSPACE
+          echo "${{github.token}}"
 

@@ -1,11 +1,38 @@
 name: Shell Command
 
-on: [push]
-
+on:
+  push:
+    #branches-ignore:
+    branches:
+      - master
+      - 'feature/*' #matches everything apart from / 
+      - 'feature/**' #matches /
+      - '!feature/featC'  #to ignore add !
+    tags:
+      - v1.* #for versions
+    paths: 
+      - '**.js' #for files
+  pull_request:
+      types: [opened, closed]
+  repository_dispatch:
+    types: [build]
+  schedule:
+    - cron: "* * * * *"
+env:
+    WF_ENV: Some value #global env
 jobs: 
   run-shell-command:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        node-versions: [6,8,10]
+      max-parallel: 3
     steps:
+      - name: Payload
+        if: github.event_name == 'push'
+        run: echo "${{github.event.client_payload}}"
       - name: echo a string
         run: echo "LOL"
       - name: multiline script
@@ -24,4 +51,14 @@ jobs:
     steps:
       - name: pwd
         run: pwd
+  print-env:
+    runs-on: ubuntu-latest
+    env:
+      LOCAL_ENV: this is available to only print-env step
+    steps:
+      - name: print some env mentioned in file
+        env: 
+          STEP_ENV: only available ofr this step
+        run: |
+          echo "${{WF_ENV}}"
   
